@@ -13,10 +13,10 @@ import java.util.List;
 import register.model.Register;
 
 public class Database {
-	String url = "jdbc:mysql://localhost:4000/bus-register?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	String url = "jdbc:mysql://localhost:4000/individual-project?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	String username = "root";
 	String password = "";
-	String name = "bus-register";
+	String name = "individual-project";
     String sql = "";
 	Statement stmt;
 	static Connection con;
@@ -33,12 +33,12 @@ public class Database {
 	public void addRegister( Register r) throws SQLException {
 		sql= "Insert into user Values( ?,?,?,?,?);";
 	    statement= con.prepareStatement(sql);
-
-	    statement.setString(1, r.getFirstName());
-	    statement.setString(2,r.getlastName());
-	    statement.setString(3,r.getUsername());
-	    statement.setString(4,r.getPassword());
-	    statement.setString(5,r.getConfirmPassword());
+	    statement.setInt(1, r.getUserID());
+	    statement.setString(2, r.getFirstName());
+	    statement.setString(3,r.getlastName());
+	    statement.setString(4,r.getUsername());
+	    statement.setString(5,r.getPassword());
+	    
 	    
 	    
 	    statement.executeUpdate();

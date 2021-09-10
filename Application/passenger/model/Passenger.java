@@ -2,13 +2,13 @@ package passenger.model;
 
 public class Passenger {
 	private int passengerID;
-	private String name;
+	private String fullName;
 	private int contact;
 	private String passengerType;
 	
 	public Passenger(int id,String nam,int cont,String type){
 	passengerID=id;
-	name=nam;
+	fullName=nam;
 	contact=cont;
 	passengerType=type;
 	}
@@ -16,7 +16,7 @@ public class Passenger {
 	return passengerID;
 	}
 	public String getName(){
-	return name;
+	return fullName;
 	}
 	public int getContact(){
 	return contact;
@@ -29,7 +29,7 @@ public class Passenger {
 	passengerID=id;
 	}
 	public void setName(String nam){
-	name=nam;
+	fullName=nam;
 	}
 	public void setContact(int cont){
 	contact=cont;
@@ -38,7 +38,7 @@ public class Passenger {
 	passengerType=type;
 	}
 	public String toString() {
-		return "Passenger [id=" + passengerID + ", name=" + name + ", contact=" + contact + ", passengerType=" + passengerType + "]";
+		return "Passenger [id=" + passengerID + ", name=" + fullName + ", contact=" + contact + ", passengerType=" + passengerType + "]";
 	}
 	
 }

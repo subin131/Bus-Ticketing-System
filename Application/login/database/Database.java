@@ -14,10 +14,10 @@ import login.model.Login;
 
 public class Database {
 
-	String url = "jdbc:mysql://localhost:4000/login?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	String url = "jdbc:mysql://localhost:4000/individual-project?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	String username = "root";
 	String password = "";
-	String name = "login";
+	String name = "individual-project";
     String sql = "";
 	Statement stmt;
 	static Connection con;
@@ -32,7 +32,7 @@ public class Database {
 	} 
 	
 	public void addLogin(Login l) throws SQLException {
-		sql= "Insert into login1 Values( ?,?);";
+		sql= "Insert into user Values( ?,?);";
 	    statement= con.prepareStatement(sql);
 
 	    statement.setString(1, l.getUsername());
@@ -47,7 +47,7 @@ public class Database {
 	
 	//retrieves all the login details stored in db
 	  public ArrayList<Login> viewLogin() throws SQLException {
-	    sql= "Select * from login1;";
+	    sql= "SELECT * FROM user WHERE Username=? AND Password=?";
 	    statement= con.prepareStatement(sql);
 	    
 	    ArrayList<Login> allLogin= new ArrayList<>();

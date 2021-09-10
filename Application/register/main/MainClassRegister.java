@@ -7,6 +7,9 @@ import register.model.Register;
 public class MainClassRegister {
 public static void main(String [] args) throws SQLException {
 	Scanner sc=new Scanner(System.in);
+	int randNo = (int) Math.round(Math.random() * ((999 - 1) + 1) + 1);
+    int userID = (randNo);
+	sc.nextLine();
 	System.out.println("Enter the first name:");
 	String fn=sc.nextLine();
 	sc.nextLine();
@@ -19,10 +22,9 @@ public static void main(String [] args) throws SQLException {
 	System.out.println("Enter the password:");
 	String p=sc.nextLine();
 	sc.nextLine();
-	System.out.println("Enter the confirm password:");
-	String cp=sc.nextLine();
 	
-	Register r=new Register (fn,ln,un,p,cp);
+	
+	Register r=new Register (userID,fn,ln,un,p);
 	
 	Database db=new Database();
 	db.addRegister(r);

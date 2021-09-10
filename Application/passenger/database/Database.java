@@ -13,10 +13,10 @@ import passenger.model.Passenger;
 
 
 public class Database {
-	String url = "jdbc:mysql://localhost:4000/bus-passenger?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	String url = "jdbc:mysql://localhost:4000/individual-project?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	String username = "root";
 	String password = "";
-	String name = "bus-passenger";
+	String name = "individual-project";
     String sql = "";
 	Statement stmt;
 	static Connection con;
@@ -32,7 +32,7 @@ public class Database {
 //	// adding the new passenger
 	public void addPassenger(Passenger p) throws SQLException {
 
-		sql= "Insert into table1 Values( ?,?,?,?);";
+		sql= "Insert into passenger Values( ?,?,?,?);";
 	    statement= con.prepareStatement(sql);
 
 	    statement.setInt(1, p.getPassengerID());
@@ -46,7 +46,7 @@ public class Database {
 }
 	 //retrieves all the passenger stored in db
 	  public ArrayList<Passenger> viewPassenger() throws SQLException {
-	    sql= "Select * from books;";
+	    sql= "Select * from passenger;";
 	    statement= con.prepareStatement(sql);
 	    
 	    ArrayList<Passenger> allPassenger= new ArrayList<>();
@@ -67,7 +67,7 @@ public class Database {
 //	  
 //	//deletes a book from db according to book ID
 	  public void deletePassenger( int passID) throws SQLException {
-    sql= "Delete from table1 where pass_id = ?;";
+    sql= "Delete from passenger where pass_id = ?;";
 	    statement= con.prepareStatement(sql);
 
 	    statement.setInt(1,passID);
@@ -76,12 +76,12 @@ public class Database {
 	    statement.close();
 	  }
 //	//updates the name of passenger by id in db
-	  public void updateBookName(String passId,String name) throws SQLException{
-	    sql= "Update books set Name =? where pass_id =?;";
+	  public void updatePassenger(int userID,String uname) throws SQLException{
+	    sql= "Update user set Username =? where UserID =?;";
 	    statement= con.prepareStatement(sql);
 
-	    statement.setString(1,name);
-	    statement.setString(2,passId);
+	    statement.setString(1,uname);
+	    statement.setInt(2,userID);
 
 	    statement.executeUpdate();
 	    statement.close();

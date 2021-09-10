@@ -8,7 +8,7 @@ public class myConnection {
         Connection con = null;
         try{
             Class.forName("com.mysql.jdbc.Driver");
-             con = DriverManager.getConnection("jdbc:mysql://localhost:4000/login?useSSL=false","root","");
+             con = DriverManager.getConnection("jdbc:mysql://localhost:4000/individual-project?useSSL=false","root","");
         }catch(Exception ex){
             System.out.println(ex.getMessage());
            

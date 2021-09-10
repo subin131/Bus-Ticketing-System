@@ -13,10 +13,10 @@ import billing.model.Billing;
 
 
 public class Database {
-	String url = "jdbc:mysql://localhost:4000/bus-billing?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	String url = "jdbc:mysql://localhost:4000/bus-ticketing-system?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	String username = "root";
 	String password = "";
-	String name = "bus-billing";
+	String name = "bus-ticketing-system";
     String sql = "";
 	Statement stmt;
 	static Connection con;
@@ -31,14 +31,15 @@ public class Database {
 	} 
 	
 	public void addBills(Billing bi) throws SQLException {
-		sql= "Insert into user1 Values( ?,?,?,?,?);";
+		sql= "Insert into billing Values( ?,?,?,?,?,?);";
 	    statement= con.prepareStatement(sql);
 
-	    statement.setString(1, bi.getBillId());
+	    statement.setInt(1, bi.getBillId());
 	    statement.setInt(2,bi.getNoOfDays());
 	    statement.setDouble(3,bi.getPricePerSeat());
-	    statement.setDouble(4,bi.getTotalAmount());
-	    statement.setString(5,bi.getPaymentType());
+	    statement.setInt(4, bi.getTotalSeatReserved());
+	    statement.setDouble(5,bi.getTotalAmount());
+	    statement.setString(6,bi.getPaymentType());
 	    
 	    
 	    statement.executeUpdate();
@@ -48,7 +49,7 @@ public class Database {
 	}
 	//retrieves all the login details stored in db
 	  public ArrayList<Billing> viewBilling() throws SQLException {
-	    sql= "Select * from user1;";
+	    sql= "Select * from billing;";
 	    statement= con.prepareStatement(sql);
 	    
 	    ArrayList<Billing> allBilling= new ArrayList<>();
@@ -56,15 +57,16 @@ public class Database {
 	    resultSet= statement.executeQuery();
 
 	    while(resultSet.next()){
-	      String billId = resultSet.getString(1);
+	      int billId = resultSet.getInt(1);
 	      int noOfDays= resultSet.getInt(2);
 	      double pricePerSeat= resultSet.getDouble(3);
-	      double totalAmount= resultSet.getDouble(4);
-	      String paymentType= resultSet.getString(5);
+	      int totalSeatReserved=resultSet.getInt(4);
+	      double totalAmount= resultSet.getDouble(5);
+	      String paymentType= resultSet.getString(6);
 	      
 	      
 
-	      allBilling.add(new Billing(billId,noOfDays,pricePerSeat,paymentType));
+	      allBilling.add(new Billing(billId,noOfDays,totalSeatReserved, pricePerSeat,paymentType));
 	    }
 	   
 	    for (Billing b : allBilling) {
@@ -75,7 +77,7 @@ public class Database {
 	  }
 	//deletes a billing from db according to billing id.
 	  public void deleteBilling( String billId) throws SQLException {
-      sql= "Delete from user1 where BillId = ?;";
+      sql= "Delete from billing where BillId = ?;";
 	    statement= con.prepareStatement(sql);
 
 	    statement.setString(1,billId);
@@ -85,7 +87,7 @@ public class Database {
 	  }
 	  //updates the number of seat of a customer in db by their billID.....
 	  public void updateBillingDetails(String billId,int noOfDays) throws SQLException{
-	    sql= "Update user1 set NumberOfDays=? where BillId =?;";
+	    sql= "Update billing set NumberOfDays=? where BillId =?;";
 	    statement= con.prepareStatement(sql);
 
 	    statement.setInt(1,noOfDays);
